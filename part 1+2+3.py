@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 ##birthday_dict = {
 ##    'Colby': '05/25/1991',
 ##    'Tiffany': "09/27/1990",
@@ -35,20 +36,41 @@ def look_up():
         print("Please enter the Name and Birthday in the prompts.")
         write_to_dict()
 
-def count_months()
+def count_month():
     birthdays = read_dict()
-
+    num_to_string = {
+	    1: "January",
+	    2: "February",
+	    3: "March",
+        4: "April",
+	    5: "May",
+	    6: "June",
+	    7: "July",
+	    8: "August",
+	    9: "September",
+	    10: "October",
+	    11: "November",
+	    12: "December"
+    }
+    months = []
+    for name, birthday_string in birthdays.items():
+	    month = int(birthday_string.split("/")[0])
+	    months.append(num_to_string[month])
+    print(Counter(months))
 
 if __name__ == '__main__':
     print('Welcome to the birthday dictionary.')
     while True:
-        prompt = input("What would you like to do? Search, Add, or Quit?").capitalize()
+        prompt = input("What would you like to do? Search, Add, Count, or Quit?").capitalize()
         if prompt == "Search":
             look_up()
         elif prompt == "Add":
             write_to_dict()
         elif prompt == "Quit":
             break
+        elif prompt =="Count":
+            print("Let's count the number of birthdays entered per month.")
+            count_month()
         else:
             print("Input not recognized. Please enter again.")
 
