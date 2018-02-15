@@ -1,7 +1,7 @@
 import json
 from collections import Counter
 from bokeh.plotting import figure, show, output_file
-
+import calendar
 
 def gen_counts():
     with open("birthday.json", "r") as f:
@@ -24,7 +24,6 @@ def gen_counts():
     for name, birthday_string in birthdays.items():
         month = int(birthday_string.split("/")[0])
         months.append(num_to_string[month])
-    print(months)
     counter = Counter(months)
     return counter
 
@@ -35,9 +34,9 @@ def gen_graph(count):
     for key, value in count.items():
         x.append(key)
         y.append(value)
-    print(x)
-    print(y)
-    p=figure(x_range=x)
+    for i in range(1, 13):
+        x_cat.append(calendar.month_name[i])
+    p=figure(x_range=x_cat)
     p.vbar(x=x, top=y, width=0.5)
     show(p)
 
